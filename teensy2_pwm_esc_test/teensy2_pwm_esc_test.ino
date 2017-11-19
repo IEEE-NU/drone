@@ -15,80 +15,37 @@ void loop()
 {
   unsigned long prevMillis = millis();
   unsigned long currentMillis = millis();
-  
-  while (currentMillis - prevMillis < 2000) {
-    for (int i=0; i<4; i++) {
-      analogWrite(escPins[i], 255);
-    }
-    currentMillis = millis();
-  }
 
-  prevMillis = millis();
-  currentMillis = millis();
-  while (currentMillis - prevMillis < 200) {
-    for (int i=0; i<4; i++) {
-      analogWrite(escPins[i], 0);
-    }
-    currentMillis = millis();
-  }
-  
-  prevMillis = millis();
-  currentMillis = millis();
-  while (currentMillis - prevMillis < 200) {
-    for (int i=0; i<4; i++) {
-      analogWrite(escPins[i], 254);
-    }
-    currentMillis = millis();
-  }
-  
-  prevMillis = millis();
-  currentMillis = millis();
-  while (currentMillis - prevMillis < 200) {
-    for (int i=0; i<4; i++) {
-      analogWrite(escPins[i], 0);
-    }
-    currentMillis = millis();
-  }
-
-  prevMillis = millis();
-  currentMillis = millis();
+  freq_change(2000, 255);
+  freq_change(200, 0);
+  freq_change(200, 254);
+  freq_change(200, 0);
   // should be armed now
-  while (currentMillis - prevMillis < 2000) {
-    for (int i=0; i<4; i++) {
-      analogWrite(escPins[i], 0);
-    }
-    currentMillis = millis();
-  }
+  freq_change(2000, 0);
+
   
   while(1) {
-    prevMillis = millis();
-    currentMillis = millis();
-    while (currentMillis - prevMillis < 1500) {
-      for (int i=0; i<4; i++) {
-        analogWrite(escPins[i], 25);
-      }
-      currentMillis = millis();
-    }
-    
-    prevMillis = millis();
-    currentMillis = millis();
-    while (currentMillis - prevMillis < 1500) {
-      for (int i=0; i<4; i++) {
-        analogWrite(escPins[i], 100);
-      }
-      currentMillis = millis();
-    }
-    
-    prevMillis = millis();
-    currentMillis = millis();
+ 
+    freq_change(1500, 25);
+    freq_change(1500, 100);
     digitalWrite(ledPin, HIGH);
-    while (currentMillis - prevMillis < 1500) {
-      for (int i=0; i<4; i++) {
-        analogWrite(escPins[i], 175);
-      }
-      currentMillis = millis();
-    }
+    freq_change(1500, 175);
     digitalWrite(ledPin, LOW);
+    
+  }
+}
+
+
+void freq_change(int comp, int freq)
+{
+  unsigned long prevMillis = millis();
+  unsigned long currentMillis = millis();
+
+  while (currentMillis - prevMillis < comp) {
+    for (int i=0; i<4; i++) {
+      analogWrite(escPins[i], freq);
+    }
+    currentMillis = millis();
   }
 }
 
