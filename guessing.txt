@@ -1,0 +1,101 @@
+send roll values
+roll=1500 
+throttle=30
+pitch=1500
+
+#####################################Use the following if statement ###################################
+
+###Other possibility for both: instead of throttle, do 5, -5
+###maybe have a neutral throttle at the end of the if statements
+
+############# increment and decrement throttle, eventually don't change the throttle, if change throttle before you send it, don't need the time sleep 
+
+## only call board.setRawRC(roll, pitch, 1500, convertThrottle...) after if statment, all switches do is change the roll and throttle value
+
+#if working fast enough, just copy and paste into the facial recognition program 
+#change values
+
+
+if x_pos > 325:
+	roll+=5
+
+elif x_pos<305:
+	roll+=-5
+	
+
+if y_pos > 228:
+	throttle-=5
+	
+elif y_pos<208:
+	throttle+=5
+
+#going backwards: pitch plus throttle add extra if
+#using face area
+if face_size< 600:
+	pitch -= 5
+	throtte += 5
+
+if face_size> 620
+	pitch +=5
+	throttle -=5
+
+board.setRawRC(board.convertSignedPercentToRCvalue(roll), 1500, 1500, board.convertThrottlePercentToRaw(throttle))
+
+#four is backwards
+#two is correct
+# 1 is wrong
+#3 is right
+
+
+#leave propellers on, be safe, check clearences of wires first, only run it with propellers once raspberry pi is on and working
+
+#roll: right two much higher than left two
+#throttle: louder or softer (all)
+
+
+########################Don't use the stuff below###########################################
+
+
+
+
+
+
+
+
+
+if x_pos > 325:
+	board.setRawRC(board.convertSignedPercentToRCvalue(5), 1500, 1500,convertThrottlePercentToRaw(throttle))
+
+elif x_pos<305:
+	board.setRawRC(board.convertSignedPercentToRPvalue(-5), 1500, 1500, convertThrottlePercentToRaw(throttle))
+
+if y_pos > 228:
+	board.setRawRC(1500, 1500, 1500, convertThrottlePercentToRaw(throttle-5))
+	time.sleep(.5)
+	board.setRawRC(1500, 1500, 1500, convertThrottlePercentToRaw(throttle))
+
+elif y_pos<208:
+	board.setRawRC(1500, 1500, 1500, convertThrottlePercentToRaw(throttle-5))
+	time.sleep(.5)
+	board.setRawRC(1500, 1500, 1500, convertThrottlePercentToRaw(throttle))
+
+####################### OR #############################
+
+
+if x_pos > 325:
+
+	if y_pos > 228:
+		board.setRawRC(board.convertSignedPercentToRPvalue(5), 1500, 1500, convertThrottlePercentToRaw(throttle-5))
+
+	else:
+		board.setRawRC(board.convertSignedPercentToRPvalue(5), 1500, 1500 convertThrottlePercentToRaw(throttle+5))
+
+
+el if x_pos<305:
+	if y_pos > 228:
+		board.setRawRC(board.convertSignedPercentToRPvalue(-5), 1500, 1500, convertThrottlePercentToRaw(throttle-5))
+
+	else:
+		board.setRawRC(board.convertSignedPercentToRPvalue(-5), 1500, 1500 convertThrottlePercentToRaw(throttle+5))
+time.sleep(.5)
+board.setRawRC(1500, 1500, 1500, convertThrottlePercentToRaw(throttle))
